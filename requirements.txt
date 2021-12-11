@@ -1,2 +1,2 @@
 Flask
-pokepy==0.4.0
+pokepy --install-option='--use-feature-2020-resolver'
