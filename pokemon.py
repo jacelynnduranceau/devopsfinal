@@ -34,10 +34,10 @@ min_gen_eight = 810
 max_gen_eight = 898
 
 class Pokemon:
-    def __init__(self, name, nickname, id, height, weight, type1, type2, ability1, ability2, image_png):
+    def __init__(self, name, nickname, number, height, weight, type1, type2, ability1, ability2, image_png):
         self.name = name
         self.nickname = nickname
-        self.id = id
+        self.number = number
         self.height = height
         self.weight = weight
         self.type1 = type1
@@ -46,26 +46,26 @@ class Pokemon:
         self.ability2 = ability2
         self.image_png = image_png
 
-def get_pokemon_by_id(id):
-    return client.get_pokemon(id)[0]
+def get_pokemon_by_number(number):
+    return client.get_pokemon(number)[0]
 
 def get_pokemon_by_name(name):
     return client.get_pokemon(name)[0]
 
-def get_pokemon_name_by_id(id):
-    return get_pokemon_by_id(id).name.capitalize()
+def get_pokemon_name_by_number(number):
+    return get_pokemon_by_number(number).name.capitalize()
 
-def get_pokemon_id_by_name(name):
+def get_pokemon_number_by_name(name):
     return get_pokemon_by_name(name).id
 
-def get_pokemon_weight(id):
-    return get_pokemon_by_id(id).weight
+def get_pokemon_weight(number):
+    return get_pokemon_by_number(number).weight
 
-def get_pokemon_height(id):
-    return get_pokemon_by_id(id).height
+def get_pokemon_height(number):
+    return get_pokemon_by_number(number).height
 
-def get_pokemon_types(id):
-    types = get_pokemon_by_id(id).types
+def get_pokemon_types(number):
+    types = get_pokemon_by_number(number).types
     type_names = []
     type_names.append(types[0].type.name.capitalize())
     if len(types) > 1:
@@ -75,8 +75,8 @@ def get_pokemon_types(id):
 
     return type_names
 
-def get_pokemon_abilities(id):
-    abilities = get_pokemon_by_id(id).abilities
+def get_pokemon_abilities(number):
+    abilities = get_pokemon_by_number(number).abilities
     ability_names = []
     ability_names.append(abilities[0].ability.name.capitalize())
     if len(abilities) > 1:
@@ -86,16 +86,16 @@ def get_pokemon_abilities(id):
 
     return ability_names
 
-def get_pokemon_image_link(id):
-    return str(get_pokemon_by_id(id).sprites).split("|")[1].strip()
+def get_pokemon_image_link(number):
+    return str(get_pokemon_by_number(number).sprites).split("|")[1].strip()
 
 if __name__ == "__main__":
     client = pokepy.V2Client()
-    id = input("Enter id: ")
-    print(get_pokemon_name_by_id(id))
-    print(get_pokemon_height(id))
-    print(get_pokemon_weight(id))
-    print(get_pokemon_types(id))
-    print(get_pokemon_abilities(id))
-    print(get_pokemon_image_link(id))
+    number = input("Enter number: ")
+    print(get_pokemon_name_by_number(number))
+    print(get_pokemon_height(number))
+    print(get_pokemon_weight(number))
+    print(get_pokemon_types(number))
+    print(get_pokemon_abilities(number))
+    print(get_pokemon_image_link(number))
 
