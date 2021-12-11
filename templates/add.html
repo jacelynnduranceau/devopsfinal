@@ -1,20 +1,67 @@
-<!DOCTYPE html>  
- <html>  
- <head>  
- <title>Add Player</title>  
- </head>  
- <body>  
-  <h2>Player Information</h2>   
- <form action = "/save" method="post">   
- <table>  
- <tr><td>First Name</td><td><input type="text" name="fname"></td></tr>
- <tr><td>Last Name</td><td><input type="text" name="lname"></td></tr>  
- <tr><td>Position</td><td><input type="text" name="pos"></td></tr>  
- <tr><td>Number</td><td><input type="text" name="num"></td></tr>  
- <tr><td>Draft or Trade ?</td><td><input type="text" name="drafted"></td></tr>  
- <tr><td><input type="submit" value="Submit"></td></tr>  
- </table>  
- </form>  
- </body>  
- </html>  
- 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Your Pokemon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="d1">
+        <p class="p1"><img style="vertical-align: middle;"
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"></img>RANDOM
+            POKEMON - Bulbasaur<img style="vertical-align: middle;"
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"></img></p>
+    </div>
+    <div class="d2">
+        <div class="d3">
+            <div class="d4">
+                <table class="t1">
+                    <thead>
+                        <tr style="background-color: red; color: white" class="tr1">
+                            <th class="th1">Image</th>
+                            <th class="th1">Number</th>
+                            <th class="th1">Name</th>
+                            <th class="th1">Height</th>
+                            <th class="th1">Weight</th>
+                            <th class="th1">Type One</th>
+                            <th class="th1">Type Two</th>
+                            <th class="th1">Ability One</th>
+                            <th class="th1">Ability Two</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tr1">
+                            <td><img
+                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"></img>
+                            </td>
+                            <td>001</td>
+                            <td>Bulbasaur</td>
+                            <td>7</td>
+                            <td>69</td>
+                            <td>Grass</td>
+                            <td>Poison</td>
+                            <td>Overgrow</td>
+                            <td>Chlorophyll</td>
+                        </tr>
+                    </tbody>
+                    <tr class="tr1">
+                        <td colspan="10" style="text-align: center;">
+                            <p style="margin-bottom: 0;">Would you like to catch this pokemon?</p>
+                            <table style="width: 95%; margin-left: auto; margin-right: auto; padding-bottom: 10px;">
+                                <tr>
+                                    <th colspan="1" style="text-align: center; width:50%"><button
+                                            class="b1">Catch</button></th>
+                                    <th colspan="1" style="text-align: center; width:50%"><button class="b2"
+                                            onClick="window.location.reload();">Run Away</button></th>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

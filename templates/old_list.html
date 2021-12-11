@@ -1,0 +1,33 @@
+<!DOCTYPE html>  
+ <html>  
+    <head>  
+        <title>Player List</title>  
+    </head>  
+
+    <body>  
+        <h3>Player  Information</h3>   
+        <table border=5>  
+            <thead>  
+            <td>ID</td>  
+            <td>Last Name</td>  
+            <td>First Name</td>   
+            <td>Position</td>
+            <td>Number</td>
+            <td>Acquired</td>      
+            </thead>  
+            {% for result in results %}  
+                <tr>  
+                    <td>{{result[0]}}</td>  
+                    <td>{{result[1]}}</td>  
+                    <td>{{result[2]}}</td>  
+                    <td>{{result[3]}}</td>
+                    <td>{{result[4]}}</td>
+                    <td>{{result[5]}}</td>    
+                </tr>  
+            {% endfor %}    
+        </table>  
+            <br><br>  
+            <a href="/">Go back to home page</a>  
+    </body>  
+ </html> 
+ 
