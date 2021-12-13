@@ -1,6 +1,8 @@
 
 import os
 import exampleDB3 as db
+import pokemon as poke
+import random
 from flask import Flask, request, render_template, jsonify
 
 ## main.py
@@ -67,7 +69,7 @@ def list():
 def delete_pokemon(id):
     print("id", id)
     print("hello")
-    conn = db.sqlite3.connect('pokemon.db')     # connect to the database
+    conn = db.sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                            # create the cursor
     c.execute("DELETE FROM pokemon WHERE number = " + id)
     c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
@@ -77,20 +79,32 @@ def delete_pokemon(id):
     return render_template("list.html", results = results)  # send the results back to browser
 
 
-@app.route("/add")                      # user wants to add a player..... 
-def add():                              #    so we need to send the browser a form to fill in the information 
-    return render_template("add.html")  #    this form is also embedded in this container
+@app.route("/add", methods=["GET"])                      # user wants to add a player..... 
+def add():   
+    print("ADD")                         #    so we need to send the browser a form to fill in the information 
+    pokemon = generate_random_pokemon()
+    results = []
+    results.append(pokemon.image_png)
+    results.append(pokemon.number)
+    results.append(pokemon.name)
+    results.append(pokemon.height)
+    results.append(pokemon.weight)
+    results.append(pokemon.type1)
+    results.append(pokemon.type2)
+    results.append(pokemon.ability1)
+    results.append(pokemon.ability2)
+    print(results)
+    return render_template("add.html", results = results)  #    this form is also embedded in this container
 
 @app.route("/save", methods=["GET", "POST"])
 def save():
     if request.method == "POST":
-        fName = request.form['fname']
-        lName = request.form['lname']
-        position = request.form['pos']
-        number = request.form['num']
-        drafted = request.form['drafted']
-        db.addPlayer(fName, lName, position, number, drafted)
-        msg = "Player Record Successfully Added "
+        nickname = request.form['nickname']
+        id = request.form['number']
+        pokemon = poke.create_pokemon(strip_zeros(id))
+        db.addPokemon(pokemon.name, nickname, pokemon.number, pokemon.height, pokemon.weight, \
+            pokemon.type1, pokemon.type2, pokemon.ability1, pokemon.ability2, pokemon.image_png)
+        msg = "Pokemon Record Successfully Added "
         return render_template("success.html", msg = msg)
 
 @app.route("/delete")
@@ -98,7 +112,27 @@ def delete():
 
     return render_template("delete.html")
 
+def generate_random_pokemon():
+    exists = True
+    while exists:
+        number = random.randint(0,898)
+        str_number = str(poke.append_zeros(number))
+        conn = db.sqlite3.connect('pokeDB.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM pokemon WHERE number = " + str_number)
+        results = c.fetchall()             
+        c.close()                         
+        conn.close()    
+        # check if it is empty
+        if not results:
+            exists = False
+            pokemon = poke.create_pokemon(number)
+            return pokemon
 
+def strip_zeros(number):
+    return number.lstrip('0')
+
+# db.addPokemon(pokemon.name, pokemon.nickname,)
 
 if __name__ == "__main__":
     # print("Directory {} contains: \n".format(os.getcwd()))

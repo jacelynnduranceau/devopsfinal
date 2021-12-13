@@ -17,14 +17,14 @@ def createDB():
 # createDB() creates a DB table and prepopulates it with a list of Dicts
 #
 #
-    nameList = [{'Name':'Squirtle', 'Nickname':'Bubbles', 'Number':'007', 'Height':5, 'Weight':90, 'Type1':'Water', 'Type2':'NULL', 'Ability1':'Torrent', 'Ability2':'Rain-dish' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'},
-                {'Name':'Ivysaur', 'Nickname':'Bubbles', 'Number':'002', 'Height':5, 'Weight':90, 'Type1':'Grass', 'Type2':'Poison', 'Ability1':'Torrent', 'Ability2':'Rain-dish' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png'}
+    nameList = [{'Name':'Squirtle', 'Nickname':'Bubbles', 'Number':'007', 'Height':5, 'Weight':90, 'Type1':'Water', 'Type2':'-', 'Ability1':'Torrent', 'Ability2':'Rain-dish' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'},
+                {'Name':'Ivysaur', 'Nickname':'Bubbles', 'Number':'010', 'Height':10, 'Weight':130, 'Type1':'Grass', 'Type2':'Poison', 'Ability1':'Overgrow', 'Ability2':'Chlorophyll' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png'}
 
                 ]
 
     conn = sqlite3.connect('pokeDB.db')      # connect to the pokemon database
     c = conn.cursor()                          # create the cursor - we work from the cursor object
-    
+    print("CREATING POKEMON TABLE")
     c.execute("CREATE TABLE IF NOT EXISTS pokemon(Id INTEGER PRIMARY KEY, Name TEXT, Nickname TEXT, Number TEXT, Height INTEGER, Weight INTEGER, Type1 TEXT, Type2 TEXT,\
               Ability1 TEXT, Ability2 TEXT, Image TEXT)")
     conn.commit()                               # execute the table creation
@@ -41,7 +41,7 @@ def createDB():
     conn.close()         # Shut down the connection to the DB
 
 
-def addPlayer(id, Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, Ability2, Image):
+def addPokemon(Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, Ability2, Image):
     #
     # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
     # Called by main save() function.  It just inserts the arguments that were passed in
@@ -59,7 +59,7 @@ def addPlayer(id, Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1
 #
 # Dump all players in table
 #
-def getPlayers():
+def getPokemon():
     #
     # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
     # Called by the main list() function call
@@ -77,7 +77,7 @@ def getPlayers():
 
 # Example DELETE clause
 #     
-def deletePlayer(number):
+def deletePokemon(number):
     #
     # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
     #

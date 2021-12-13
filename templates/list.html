@@ -16,7 +16,6 @@
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"></img></p>
     </div>
     <div class="d2">
-        <p class="p2">&emsp;INFORMATION</p>
         <div class="d3">
             <div class="d4">
                 <table class="t1">
@@ -36,141 +35,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"></img>
-                            </td>
-                            <td>001</td>
-                            <td>Bulbasaur</td>
-                            <td>Buddy</td>
-                            <td>7</td>
-                            <td>69</td>
-                            <td>Grass</td>
-                            <td>Poison</td>
-                            <td>Overgrow</td>
-                            <td>Chlorophyll</td>
-                            <td><form action="/delete_pokemon" method="post"><button class="b2" type="submit" value="1">Remove</button></form></a></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"></img>
-                            </td>
-                            <td>002</td>
-                            <td>Ivysaur</td>
-                            <td>Ivy</td>
-                            <td>10</td>
-                            <td>130</td>
-                            <td>Grass</td>
-                            <td>Poison</td>
-                            <td>Overgrow</td>
-                            <td>Chlorophyll</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"></img>
-                            </td>
-                            <td>003</td>
-                            <td>Venusaur</td>
-                            <td>Venus</td>
-                            <td>20</td>
-                            <td>1000</td>
-                            <td>Grass</td>
-                            <td>Poison</td>
-                            <td>Overgrow</td>
-                            <td>Chlorophyll</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"></img>
-                            </td>
-                            <td>004</td>
-                            <td>Charmander</td>
-                            <td>Char</td>
-                            <td>6</td>
-                            <td>85</td>
-                            <td>Fire</td>
-                            <td>-</td>
-                            <td>Blaze</td>
-                            <td>Solar-power</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"></img>
-                            </td>
-                            <td>005</td>
-                            <td>Charmeleon</td>
-                            <td>Charlie</td>
-                            <td>11</td>
-                            <td>190</td>
-                            <td>Fire</td>
-                            <td>-</td>
-                            <td>Blaze</td>
-                            <td>Solar-power</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"></img>
-                            </td>
-                            <td>006</td>
-                            <td>Charizard</td>
-                            <td>Zard</td>
-                            <td>17</td>
-                            <td>905</td>
-                            <td>Fire</td>
-                            <td>-</td>
-                            <td>Blaze</td>
-                            <td>Solar-power</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"></img>
-                            </td>
-                            <td>007</td>
-                            <td>Squirtle</td>
-                            <td>Squirt</td>
-                            <td>5</td>
-                            <td>90</td>
-                            <td>Water</td>
-                            <td>-</td>
-                            <td>Torrent</td>
-                            <td>Rain-dish</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png"></img>
-                            </td>
-                            <td>008</td>
-                            <td>Wartortle</td>
-                            <td>Tortie</td>
-                            <td>10</td>
-                            <td>225</td>
-                            <td>Water</td>
-                            <td>-</td>
-                            <td>Torrent</td>
-                            <td>Rain-dish</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td><img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png"></img>
-                            </td>
-                            <td>009</td>
-                            <td>Blastoise</td>
-                            <td>Blast</td>
-                            <td>16</td>
-                            <td>855</td>
-                            <td>Water</td>
-                            <td>-</td>
-                            <td>Torrent</td>
-                            <td>Rain-dish</td>
-                            <td><button class="b2">Remove</button></td>
-                        </tr>
+                        {% for result in results %}  
+                            <tr class="tr1">  
+                                <td><img src={{result[10]}}></td> 
+                                <td>{{result[3]}}</td>
+                                <td>{{result[1]}}</td>  
+                                <td>{{result[2]}}</td>
+                                <td>{{result[4]}}</td> 
+                                <td>{{result[5]}}</td> 
+                                <td>{{result[6]}}</td> 
+                                <td>{{result[7]}}</td>     
+                                <td>{{result[8]}}</td>     
+                                <td>{{result[9]}}</td>   
+                                <td><form action="/delete_pokemon" method="post"><button class="b2" type="submit" value="1">Remove</button></form></a></td>
+                            </tr>  
+                        {% endfor %} 
                     </tbody>
                 </table>
             </div>

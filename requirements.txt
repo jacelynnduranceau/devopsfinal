@@ -1,2 +1,3 @@
 Flask
-pokepy --install-option='--use-feature-2020-resolver'
+pokepy
+urllib3
