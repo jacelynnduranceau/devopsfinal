@@ -17,9 +17,9 @@ def createDB():
 # createDB() creates a DB table and prepopulates it with a list of Dicts
 #
 #
-    nameList = [{'Name':'Squirtle', 'Nickname':'Bubbles', 'Number':'007', 'Height':5, 'Weight':90, 'Type1':'Water', 'Type2':'-', 'Ability1':'Torrent', 'Ability2':'Rain-dish' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'},
-                {'Name':'Ivysaur', 'Nickname':'Bubbles', 'Number':'010', 'Height':10, 'Weight':130, 'Type1':'Grass', 'Type2':'Poison', 'Ability1':'Overgrow', 'Ability2':'Chlorophyll' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png'}
-
+    nameList = [{'Name':'Ivysaur', 'Nickname':'Ivy', 'Number':'002', 'Height':10, 'Weight':130, 'Type1':'Grass', 'Type2':'Poison', 'Ability1':'Overgrow', 'Ability2':'Chlorophyll' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png'},
+                {'Name':'Charizard', 'Nickname':'Charlie', 'Number':'006', 'Height':17, 'Weight':905, 'Type1':'Fire', 'Type2':'Flying', 'Ability1':'Blaze', 'Ability2':'Solar-power' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png'},
+                {'Name':'Squirtle', 'Nickname':'Bubbles', 'Number':'007', 'Height':5, 'Weight':90, 'Type1':'Water', 'Type2':'-', 'Ability1':'Torrent', 'Ability2':'Rain-dish' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'}
                 ]
 
     conn = sqlite3.connect('pokeDB.db')      # connect to the pokemon database
@@ -44,7 +44,6 @@ def createDB():
 
 def addPokemon(Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, Ability2, Image):
     #
-    # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
     # Called by main save() function.  It just inserts the arguments that were passed in
     # as new entries into the DB
     # 
@@ -59,33 +58,27 @@ def addPokemon(Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, A
     conn.close()         # Shut down the connection to the DB
 
 #
-# Dump all players in table
+# Dump all pokemon in table
 #
 def getPokemon():
     #
-    # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
-    # Called by the main list() function call
+    # Called by the main pokedex() function call
     #  it just retrieves all of the entries in the table and returns them to
-    #  list() - list() will then send them back to the browser
+    #  pokedex() - pokedex() will then send them back to the browser
     #
     conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
-    c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
+    c.execute("SELECT * FROM pokemon")   # pull everything in the pokemon table
     results = c.fetchall()
     c.close()            # Close the cursor
     conn.close()         # Shut down the connection to the DB
 
     return results       # return a list from the fetchall() call
-
-# Example DELETE clause
-#     
+   
 def deletePokemon(number):
-    #
-    # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
-    #
     conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
-    c.execute("DELETE FROM pokemon WHERE number=?",(number,))  #remember the , for the TUPLE!
+    c.execute("DELETE FROM pokemon WHERE number=?",(number,))
     conn.commit()
     c.execute("SELECT * FROM pokemon")
     results= c.fetchall()

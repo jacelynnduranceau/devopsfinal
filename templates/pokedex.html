@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Your Pokemon</title>
+    <title>Your Pokémon</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -12,7 +12,7 @@
     <div class="d1">
         <p class="p1"><img style="vertical-align: middle;"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"></img>YOUR
-            POKEMON<img style="vertical-align: middle;"
+            POKÉMON<img style="vertical-align: middle;"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"></img></p>
     </div>
     <div class="d2">
@@ -51,9 +51,18 @@
                             </tr>  
                         {% endfor %} 
                         <tr class="tr1">
-                            <td colspan="5" style="text-align: right; margin-left: auto">Add More?</td>
-                            <td colspan="2"></td>
-                            <td colspan="4" style="text-align: left; margin-right: auto"><button class="b1" onclick="location.href='/add'" type="button"> Add Pokemon</button></td>
+                            <td colspan="11">
+                                <table style="width: 95%; margin-left: auto; margin-right: auto;">
+                                    <tr>
+                                        <th colspan="1" style="text-align: right; width:50%; padding-right: 10px;">
+                                            Catch More?
+                                        </th>
+                                        <th colspan="1" style="text-align: left; width:50%; padding-left: 10px;">
+                                            <button class="b1" onclick="location.href='/catch'" type="button"> Catch More Pokémon!</button>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

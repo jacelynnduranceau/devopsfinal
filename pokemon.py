@@ -15,30 +15,6 @@ class Pokemon:
         self.ability2 = ability2
         self.image_png = image_png
 
-# def get_poke_info(number):
-#     id = strip_zeros(number)
-#     name = get_pokemon_name_by_number(id)
-#     number_pokemon = append_zeros(id)
-#     height = get_pokemon_height(id)
-#     weight = get_pokemon_weight(id)
-#     types = get_pokemon_types(id)
-#     abilities = get_pokemon_abilities(id)
-#     image = get_pokemon_image_link(id)
-#     return [name, number_pokemon, height, weight, types, abilities, image]
-
-# def random_pokemon(number):
-#     info = get_poke_info(number)
-#     name = info[0]
-#     number_pokemon = info[1]
-#     height = info[2]
-#     weight = info[3]
-#     types = info[4]
-#     abilities = info[5]
-#     image = info[6]
-#     pokemon = Pokemon(name, '-', number_pokemon, height, weight, types[0], \
-#         types[1], abilities[0], abilities[1], image)
-#     return pokemon
-
 def create_pokemon(number):
     name = get_pokemon_name_by_number(number)
     number_pokemon = append_zeros(number)
@@ -100,7 +76,7 @@ def get_pokemon_abilities(number):
     if len(abilities) > 1:
         ability_names.append(abilities[1].ability.name.capitalize())
     else:
-        ability_names.append(None)
+        ability_names.append("-")
 
     return ability_names
 

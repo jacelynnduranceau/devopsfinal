@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Your Pokemon</title>
+    <title>Catch Pokémon</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -10,7 +10,7 @@
     <div class="d1">
         <p class="p1"><img style="vertical-align: middle;"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"></img>RANDOM
-            POKEMON - {{results[2]}}<img style="vertical-align: middle;"
+            POKÉMON - {{results[2]}}<img style="vertical-align: middle;"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"></img></p>
     </div>
     <div class="d2">
@@ -45,11 +45,11 @@
                     </tbody>
                     <tr class="tr1">
                         <td colspan="10" style="text-align: center;">
-                            <p style="margin-bottom: 0;">Would you like to catch this pokemon?</p>
+                            <p style="margin-bottom: 0;">Would you like to catch this pokémon?</p>
                             <table style="width: 95%; margin-left: auto; margin-right: auto; padding-bottom: 10px;">
                                 <tr>
                                     <th colspan="1" style="text-align: center; width:50%">
-                                        <form action="/save" method="post"><input hidden name="number" value={{results[1]}}><input required class="i1" id="nicknameInput" type="text" name="nickname" placeholder="Enter Nickname . . . "><button type="submit" class="b1" value="Catch" onClick="validate()">Catch</button></form>
+                                        <form action="/save" method="post"><input hidden name="number" value={{results[1]}}><input required class="i1" id="nicknameInput" type="text" name="nickname" placeholder="Enter Nickname . . . " maxlength="20"><button type="submit" class="b1" value="Catch" onClick="validate()">Catch</button></form>
                                     </th>
                                     <th colspan="1" style="text-align: center; width:50%">
                                         <button class="b2" onClick="window.location.reload();">Run Away</button>
@@ -66,7 +66,7 @@
         function validate() {
             if(document.getElementById("nicknameInput").value.length == 0)
             {
-                alert("Give your pokemon a nickname before saving!")
+                alert("Give your pokémon a nickname before saving!")
             }
         }
     </script>

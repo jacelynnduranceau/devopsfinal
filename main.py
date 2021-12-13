@@ -9,7 +9,7 @@ from flask import Flask, request, render_template, redirect, url_for, jsonify
 #
 ## Simple (fat-finger) flask application.  The application acts as a "frontend"
 #   for the exampleDB3.py sqlite3 database engine.  
-# The container starts by immediately deleting any old versions of the 'eaglesDB.db' SQL database.  If you want to persist
+# The container starts by immediately deleting any old versions of the 'pokeDB.db' SQL database.  If you want to persist
 #  this DB then delete these two lines and change the 'createDB' function in exampleDB3.py
 #  as appropriate - perhaps reading the DB in from disk first.
 #
@@ -23,55 +23,47 @@ from flask import Flask, request, render_template, redirect, url_for, jsonify
 # This program imports another python module called 'exampleDB3.py' which contains the
 # SQLite processing engine.  the python import statement 'import exampleDB3 as db'
 # means that any time that we want to call a function in exampleDB3, we need to preface 
-# that function call with 'db.'  for example instead of making a call to getPlayers(),
-# we need to call db.getPlayers()
+# that function call with 'db.'  for example instead of making a call to getPokemon(),
+# we need to call db.getPokemon()
 #
 # This program uses flask to demonstrate how to
 #   provide the appropriate URL 'route' from the user - what CRUD operation they
 #   would like to perform.  For the sake of time, it only supports the following 
 #   routes:
 #   '/'      display/send back/render the index.html file (the main welcome page)
-#   '/list'  makes a call to exampleDB3.py getPlayers() function that returns a DB dump
-#   '/add'   makes a call to exampleDB3.py addPlayer() function to add an entry in the DB
-#   '/save'  when user asks to add a player (i.e., we receive an /add route, 'GET' request ),
-#            we send them back an html form called 'add.html' to fill in with the 
+#   '/pokedex'  makes a call to exampleDB3.py getPokemon() function that returns a DB dump
+#   '/catch'   makes a call to exampleDB3.py addPokemon() function to add an entry in the DB
+#   '/save'  when user asks to catch a pokemon (i.e., we receive an /catch route, 'GET' request ),
+#            we send them back an html form called 'catch.html' to fill in with the 
 #            information.  When the user hits 'submit' on the browser, the form returns
 #            to us as a 'POST' call from the browser (and is routed to our /save route)
-#            this routine then picks apart what the user filled in and calls 'db.addPlayer'
-#   '/delete'unimplemented
-#
-# This program is a slightly more complex version of the testApp.py example and is
-# used to demonstrate:
-#   docker build process          - multiple python files, HTML files, installing dependencies 
-#   containers and SQLite3        - how it's no different than working with non-container based DBMS systems
-#   containers and frameworks     - how it's no different than working with non-container frameworks
-#   containers and flask and HTML - final image size implications
-#  
-#  
+#            this routine then picks apart what the user filled in and calls 'db.addPokemon'
+#   '/delete_pokemon' deletes a pokemon from the database / pokedex
+
 app = Flask(__name__)                       # instantiate the Flask class
 
 @app.route("/")                             # send the index.html 'welcome' page to the browser
 def index():
     return render_template("index.html")    # this file is imbedded in the container
 
-@app.route("/list", methods=["GET"])      # user requested that we list the DB contents
-def list():
+@app.route("/pokedex", methods=["GET"])      # user requested that we list the DB contents via the pokedex
+def pokedex():
     conn = db.sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                            # create the cursor
-    c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
+    c.execute("SELECT * FROM pokemon")   # pull everything in the pokemon table
     results = c.fetchall()              # put evverything into a list
     c.close()                           # Close the cursor
     conn.close()                        # Shut down the connection to the DB
-    return render_template("list.html", results = results)  # send the results back to browser
+    return render_template("pokedex.html", results = results)  # send the results back to browser
 
 @app.route("/delete_pokemon", methods=["POST"]) 
 def delete_pokemon():
     id = request.form['id']
     db.deletePokemon(str(id))
-    return redirect(url_for('list'))  # send the results back to browser
+    return redirect(url_for('pokedex'))  # send the results back to browser
 
-@app.route("/add", methods=["GET"])                      # user wants to add a player..... 
-def add():   
+@app.route("/catch", methods=["GET"])      # user wants to catch a pokemon..... 
+def catch():   
     pokemon = generate_random_pokemon()
     results = []
     results.append(pokemon.image_png)
@@ -83,7 +75,7 @@ def add():
     results.append(pokemon.type2)
     results.append(pokemon.ability1)
     results.append(pokemon.ability2)
-    return render_template("add.html", results = results)  #    this form is also embedded in this container
+    return render_template("catch.html", results = results)  #    this form is also embedded in this container
 
 @app.route("/save", methods=["GET", "POST"])
 def save():
@@ -93,8 +85,9 @@ def save():
         pokemon = poke.create_pokemon(strip_zeros(id))
         db.addPokemon(pokemon.name, nickname, pokemon.number, pokemon.height, pokemon.weight, \
             pokemon.type1, pokemon.type2, pokemon.ability1, pokemon.ability2, pokemon.image_png)
-        msg = "Pokemon Record Successfully Added "
-        return render_template("success.html", msg = msg)
+        msg = "Pokémon " + pokemon.name + " (" + pokemon.number + ") caught!"
+        img = pokemon.image_png
+        return render_template("success.html", msg = msg, img=img)
 
 # @app.route("/delete")
 # def delete():
