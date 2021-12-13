@@ -89,11 +89,6 @@ def save():
         img = pokemon.image_png
         return render_template("success.html", msg = msg, img=img)
 
-# @app.route("/delete")
-# def delete():
-
-#     return render_template("delete.html")
-
 def generate_random_pokemon():
     exists = True
     while exists:
@@ -105,7 +100,7 @@ def generate_random_pokemon():
         results = c.fetchall()             
         c.close()                         
         conn.close()    
-        # check if it is empty
+        # check if it is empty so you know you haven't caught it yet
         if not results:
             exists = False
             pokemon = poke.create_pokemon(number)
