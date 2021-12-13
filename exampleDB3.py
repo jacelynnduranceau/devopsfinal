@@ -17,48 +17,40 @@ def createDB():
 # createDB() creates a DB table and prepopulates it with a list of Dicts
 #
 #
-    nameList = [{'fName':'Nick', 'lName':'Foles', 'position':'QB', 'number':9, 'drafted':'yes'},
-                    {'fName':'Carson', 'lName':'Wentz', 'position':'QB', 'number':11, 'drafted':'yes'},
-                    {'fName':'Jalen', 'lName':'Hurts', 'position':'QB', 'number':2, 'drafted':'yes'},
-                    {'fName':'Jalen', 'lName':'Reagor', 'position':'WR', 'number':18, 'drafted':'yes'},
-                    {'fName':'Travis', 'lName':'Fulgham', 'position':'WR', 'number':13, 'drafted':'yes'},
-                    {'fName':'Fletcher', 'lName':'Cox', 'position':'DE', 'number':91, 'drafted':'yes'},
-                    {'fName':'Zach', 'lName':'Ertz', 'position':'TE', 'number':86, 'drafted':'yes'},
-                    {'fName':'Joe', 'lName':'Flacco', 'position':'QB', 'number':0, 'drafted':'yes'},
-                    {'fName':'Darius', 'lName':'Slay', 'position':'CB', 'number':24, 'drafted':'yes'},
-                    {'fName':'Jordan', 'lName':'Mailata', 'position':'RT', 'number':68, 'drafted':'yes'},
-                    {'fName':'Alex', 'lName':'Singleton', 'position':'LB', 'number':49, 'drafted':'yes'},
-                    {'fName':'Dallas', 'lName':'Goedert', 'position':'TE', 'number':88, 'drafted':'yes'},
-                        ]
+    nameList = [{'Name':'Squirtle', 'Nickname':'Bubbles', 'Number':'007', 'Height':5, 'Weight':90, 'Type1':'Water', 'Type2':'NULL', 'Ability1':'Torrent', 'Ability2':'Rain-dish' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'},
+                {'Name':'Ivysaur', 'Nickname':'Bubbles', 'Number':'002', 'Height':5, 'Weight':90, 'Type1':'Grass', 'Type2':'Poison', 'Ability1':'Torrent', 'Ability2':'Rain-dish' , 'Image':'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png'}
 
-    conn = sqlite3.connect('eaglesDB.db')      # connect to the eagles database
+                ]
+
+    conn = sqlite3.connect('pokeDB.db')      # connect to the pokemon database
     c = conn.cursor()                          # create the cursor - we work from the cursor object
     
-    c.execute("CREATE TABLE IF NOT EXISTS eagles(id INTEGER PRIMARY KEY, fName TEXT, lName TEXT, position TEXT, number INTEGER, drafted TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS pokemon(Id INTEGER PRIMARY KEY, Name TEXT, Nickname TEXT, Number TEXT, Height INTEGER, Weight INTEGER, Type1 TEXT, Type2 TEXT,\
+              Ability1 TEXT, Ability2 TEXT, Image TEXT)")
     conn.commit()                               # execute the table creation
 
     id = 0
     for item in nameList:
         id += 1
-        print("Inserting: ", id, item['fName'], item['lName'], item['position'], item['number'], item['drafted'])
-        c.execute("INSERT INTO eagles VALUES(?, ?, ?, ?, ?, ?)", (id, item['fName'], item['lName'], item['position'], item['number'], item['drafted']))
+        print("Inserting: ", id, item['Name'], item['Nickname'], item['Number'], item['Height'], item['Weight'], item['Type1'], item['Type2'], item['Ability1'], item['Ability2'], item['Image'])
+        c.execute("INSERT INTO pokemon VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (id, item['Name'], item['Nickname'], item['Number'], item['Height'], item['Weight'], item['Type1'], item['Type2'], item['Ability1'], item['Ability2'], item['Image']))
         conn.commit()
  
-    print("\nList of Eagles players complete, {0} names were inserted",len(nameList))
+    print("\nList of Pokemon complete, {0} names were inserted",len(nameList))
     c.close()            # Close the cursor
     conn.close()         # Shut down the connection to the DB
 
 
-def addPlayer(fname, lname, pos, num, draft):
+def addPlayer(id, Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, Ability2, Image):
     #
     # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
     # Called by main save() function.  It just inserts the arguments that were passed in
     # as new entries into the DB
     # 
     id = randint(25,63)
-    conn = sqlite3.connect('eaglesDB.db')     # connect to the database
+    conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
-    c.execute("INSERT INTO eagles VALUES(?, ?, ?, ?, ?, ?)",(id, fname, lname, pos, num, draft))
+    c.execute("INSERT INTO pokemon VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",(id, Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, Ability2, Image))
     conn.commit()
 
     c.close()            # Close the cursor
@@ -74,9 +66,9 @@ def getPlayers():
     #  it just retrieves all of the entries in the table and returns them to
     #  list() - list() will then send them back to the browser
     #
-    conn = sqlite3.connect('eaglesDB.db')     # connect to the database
+    conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
-    c.execute("SELECT * FROM eagles")   # pull everything in the eagles table
+    c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
     results = c.fetchall()
     c.close()            # Close the cursor
     conn.close()         # Shut down the connection to the DB
@@ -89,11 +81,11 @@ def deletePlayer(number):
     #
     # (id INTEGER PRIMARY KEY, fName , lName, position, number, drafted)
     #
-    conn = sqlite3.connect('eaglesDB.db')     # connect to the database
+    conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
-    c.execute("DELETE FROM eagles WHERE number=?",(number,))  #remember the , for the TUPLE!
+    c.execute("DELETE FROM pokemon WHERE number=?",(number,))  #remember the , for the TUPLE!
 
-    c.execute("SELECT * FROM eagles")
+    c.execute("SELECT * FROM pokemon")
     results= c.fetchall()
 
     c.close()            # Close the cursor

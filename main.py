@@ -55,9 +55,9 @@ def index():
 @app.route("/list", methods=["GET"])      # user requested that we list the DB contents
 def list():
 
-    conn = db.sqlite3.connect('eaglesDB.db')     # connect to the database
+    conn = db.sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                            # create the cursor
-    c.execute("SELECT * FROM eagles")   # pull everything in the eagles table
+    c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
     results = c.fetchall()              # put evverything into a list
     c.close()                           # Close the cursor
     conn.close()                        # Shut down the connection to the DB
@@ -67,10 +67,10 @@ def list():
 def delete_pokemon(id):
     print("id", id)
     print("hello")
-    conn = db.sqlite3.connect('eaglesDB.db')     # connect to the database
+    conn = db.sqlite3.connect('pokemon.db')     # connect to the database
     c = conn.cursor()                            # create the cursor
-    c.execute("DELETE FROM eagles WHERE number = " + id)
-    c.execute("SELECT * FROM eagles")   # pull everything in the eagles table
+    c.execute("DELETE FROM pokemon WHERE number = " + id)
+    c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
     results = c.fetchall()              # put evverything into a list
     c.close()                           # Close the cursor
     conn.close()                        # Shut down the connection to the DB
@@ -103,9 +103,9 @@ def delete():
 if __name__ == "__main__":
     # print("Directory {} contains: \n".format(os.getcwd()))
     # print(os.listdir(os.getcwd()))
-    if os.path.exists('eaglesDB.db'):
-        print ("Deleting old versions of eaglesDB.db from the {} directory".format(os.getcwd()))
-        os.remove('eaglesDB.db')    # delete any old versions - don't use if you need persistence!
+    if os.path.exists('pokeDB.db'):
+        print ("Deleting old versions of pokeDB.db from the {} directory".format(os.getcwd()))
+        os.remove('pokeDB.db')    # delete any old versions - don't use if you need persistence!
 
     db.createDB()
     app.run(host='0.0.0.0')    # start up the flask server
