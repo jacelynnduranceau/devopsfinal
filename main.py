@@ -3,7 +3,7 @@ import os
 import exampleDB3 as db
 from flask import Flask, request, render_template, jsonify
 
-### main.py
+## main.py
 #
 ## Simple (fat-finger) flask application.  The application acts as a "frontend"
 #   for the exampleDB3.py sqlite3 database engine.  
