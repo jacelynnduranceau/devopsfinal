@@ -61,8 +61,21 @@ def list():
     results = c.fetchall()              # put evverything into a list
     c.close()                           # Close the cursor
     conn.close()                        # Shut down the connection to the DB
-
     return render_template("list.html", results = results)  # send the results back to browser
+
+@app.route("/delete_pokemon") 
+def delete_pokemon(id):
+    print("id", id)
+    print("hello")
+    conn = db.sqlite3.connect('eaglesDB.db')     # connect to the database
+    c = conn.cursor()                            # create the cursor
+    c.execute("DELETE FROM eagles WHERE number = " + id)
+    c.execute("SELECT * FROM eagles")   # pull everything in the eagles table
+    results = c.fetchall()              # put evverything into a list
+    c.close()                           # Close the cursor
+    conn.close()                        # Shut down the connection to the DB
+    return render_template("list.html", results = results)  # send the results back to browser
+
 
 @app.route("/add")                      # user wants to add a player..... 
 def add():                              #    so we need to send the browser a form to fill in the information 
