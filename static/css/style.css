@@ -70,7 +70,7 @@ body {
     transform: translate(-50%,-50%);
     width: 190vh;
     height: 90vh;
-    background-image: url(grid.png);
+    background-image: url(../img/grid.png);
     border-radius: 5pt
 }
 

@@ -53,10 +53,10 @@ def create_pokemon(number):
 
 def append_zeros(number):
     #1-9
-    if number < 10:
+    if int(number) < 10:
         return "00" + str(number)
     #10-99
-    elif number > 9 and number < 100:
+    elif int(number) > 9 and int(number) < 100:
         return "0" + str(number)
     #100-898
     else:

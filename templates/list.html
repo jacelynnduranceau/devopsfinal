@@ -3,7 +3,7 @@
 
 <head>
     <title>Your Pokemon</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body style="font-family: 'Courier', monospace;
@@ -47,9 +47,14 @@
                                 <td>{{result[7]}}</td>     
                                 <td>{{result[8]}}</td>     
                                 <td>{{result[9]}}</td>   
-                                <td><form action="/delete_pokemon" method="post"><button class="b2" type="submit" value="1">Remove</button></form></a></td>
+                                <td><form action="/delete_pokemon" method="post"><input hidden name="id" value={{result[3]}}><button class="b2" type="submit" value="1">Remove</button></form></a></td>
                             </tr>  
                         {% endfor %} 
+                        <tr class="tr1">
+                            <td colspan="5" style="text-align: right; margin-left: auto">Add More?</td>
+                            <td colspan="2"></td>
+                            <td colspan="4" style="text-align: left; margin-right: auto"><button class="b1" onclick="location.href='/add'" type="button"> Add Pokemon</button></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -2,8 +2,8 @@
 import os
 import exampleDB3 as db
 import pokemon as poke
-import random
-from flask import Flask, request, render_template, jsonify
+from random import randint
+from flask import Flask, request, render_template, redirect, url_for, jsonify
 
 ## main.py
 #
@@ -56,7 +56,6 @@ def index():
 
 @app.route("/list", methods=["GET"])      # user requested that we list the DB contents
 def list():
-
     conn = db.sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                            # create the cursor
     c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
@@ -65,23 +64,15 @@ def list():
     conn.close()                        # Shut down the connection to the DB
     return render_template("list.html", results = results)  # send the results back to browser
 
-@app.route("/delete_pokemon") 
-def delete_pokemon(id):
-    print("id", id)
-    print("hello")
-    conn = db.sqlite3.connect('pokeDB.db')     # connect to the database
-    c = conn.cursor()                            # create the cursor
-    c.execute("DELETE FROM pokemon WHERE number = " + id)
-    c.execute("SELECT * FROM pokemon")   # pull everything in the eagles table
-    results = c.fetchall()              # put evverything into a list
-    c.close()                           # Close the cursor
-    conn.close()                        # Shut down the connection to the DB
-    return render_template("list.html", results = results)  # send the results back to browser
-
+@app.route("/delete_pokemon", methods=["POST"]) 
+def delete_pokemon():
+    id = request.form['id']
+    results = db.deletePokemon(str(id))
+    print(results)
+    return redirect(url_for('list'))  # send the results back to browser
 
 @app.route("/add", methods=["GET"])                      # user wants to add a player..... 
 def add():   
-    print("ADD")                         #    so we need to send the browser a form to fill in the information 
     pokemon = generate_random_pokemon()
     results = []
     results.append(pokemon.image_png)
@@ -107,15 +98,15 @@ def save():
         msg = "Pokemon Record Successfully Added "
         return render_template("success.html", msg = msg)
 
-@app.route("/delete")
-def delete():
+# @app.route("/delete")
+# def delete():
 
-    return render_template("delete.html")
+#     return render_template("delete.html")
 
 def generate_random_pokemon():
     exists = True
     while exists:
-        number = random.randint(0,898)
+        number = randint(0,898)
         str_number = str(poke.append_zeros(number))
         conn = db.sqlite3.connect('pokeDB.db')
         c = conn.cursor()
@@ -131,8 +122,6 @@ def generate_random_pokemon():
 
 def strip_zeros(number):
     return number.lstrip('0')
-
-# db.addPokemon(pokemon.name, pokemon.nickname,)
 
 if __name__ == "__main__":
     # print("Directory {} contains: \n".format(os.getcwd()))

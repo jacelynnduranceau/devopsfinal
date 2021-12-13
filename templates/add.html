@@ -3,7 +3,7 @@
 
 <head>
     <title>Your Pokemon</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
                             <table style="width: 95%; margin-left: auto; margin-right: auto; padding-bottom: 10px;">
                                 <tr>
                                     <th colspan="1" style="text-align: center; width:50%">
-                                        <form action="/save"><input hidden name="number" value={{results[1]}}><input required class="i1" id="nicknameInput" type="text" name="nickname" placeholder="Enter Nickname . . . "><button type="submit" class="b1" value="Catch" onClick="validate()">Catch</button></form>
+                                        <form action="/save" method="post"><input hidden name="number" value={{results[1]}}><input required class="i1" id="nicknameInput" type="text" name="nickname" placeholder="Enter Nickname . . . "><button type="submit" class="b1" value="Catch" onClick="validate()">Catch</button></form>
                                     </th>
                                     <th colspan="1" style="text-align: center; width:50%">
                                         <button class="b2" onClick="window.location.reload();">Run Away</button>
@@ -64,7 +64,7 @@
     </div>
     <script>
         function validate() {
-            document.getElementById("nicknameInput").value.length == 0
+            if(document.getElementById("nicknameInput").value.length == 0)
             {
                 alert("Give your pokemon a nickname before saving!")
             }

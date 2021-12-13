@@ -24,7 +24,6 @@ def createDB():
 
     conn = sqlite3.connect('pokeDB.db')      # connect to the pokemon database
     c = conn.cursor()                          # create the cursor - we work from the cursor object
-    print("CREATING POKEMON TABLE")
     c.execute("CREATE TABLE IF NOT EXISTS pokemon(Id INTEGER PRIMARY KEY, Name TEXT, Nickname TEXT, Number TEXT, Height INTEGER, Weight INTEGER, Type1 TEXT, Type2 TEXT,\
               Ability1 TEXT, Ability2 TEXT, Image TEXT)")
     conn.commit()                               # execute the table creation
@@ -84,12 +83,11 @@ def deletePokemon(number):
     conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
     c.execute("DELETE FROM pokemon WHERE number=?",(number,))  #remember the , for the TUPLE!
-
     c.execute("SELECT * FROM pokemon")
     results= c.fetchall()
-
     c.close()            # Close the cursor
     conn.close()         # Shut down the connection to the DB
+    return results
 
 ##
 # We are importing this into another program but if you wanted to
