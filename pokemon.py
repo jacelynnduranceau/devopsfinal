@@ -107,13 +107,14 @@ def get_pokemon_abilities(number):
 def get_pokemon_image_link(number):
     return str(get_pokemon_by_number(number).sprites).split("|")[1].strip().replace(">","")
 
-if __name__ == "__main__":
-    client = pokepy.V2Client()
-    number = input("Enter number: ")
-    print(get_pokemon_name_by_number(number))
-    print(get_pokemon_height(number))
-    print(get_pokemon_weight(number))
-    print(get_pokemon_types(number))
-    print(get_pokemon_abilities(number))
-    print(get_pokemon_image_link(number))
+# This can be used for validating a pokemon's info if necessary
+# if __name__ == "__main__":
+#     client = pokepy.V2Client()
+#     number = input("Enter number: ")
+#     print(get_pokemon_name_by_number(number))
+#     print(get_pokemon_height(number))
+#     print(get_pokemon_weight(number))
+#     print(get_pokemon_types(number))
+#     print(get_pokemon_abilities(number))
+#     print(get_pokemon_image_link(number))
 

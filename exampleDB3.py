@@ -28,11 +28,13 @@ def createDB():
               Ability1 TEXT, Ability2 TEXT, Image TEXT)")
     conn.commit()                               # execute the table creation
 
-    id = 0
     for item in nameList:
-        id += 1
-        print("Inserting: ", id, item['Name'], item['Nickname'], item['Number'], item['Height'], item['Weight'], item['Type1'], item['Type2'], item['Ability1'], item['Ability2'], item['Image'])
-        c.execute("INSERT INTO pokemon VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (id, item['Name'], item['Nickname'], item['Number'], item['Height'], item['Weight'], item['Type1'], item['Type2'], item['Ability1'], item['Ability2'], item['Image']))
+        print("Inserting: ", item['Name'], item['Nickname'], item['Number'], item['Height'], item['Weight'], item['Type1'], item['Type2'], item['Ability1'], item['Ability2'], item['Image'])
+        c.execute("INSERT INTO pokemon(Name, Nickname, Number, Height, Weight, Type1, Type2,\
+              Ability1, Ability2, Image) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+                  (item['Name'], item['Nickname'], item['Number'], item['Height'], \
+                   item['Weight'], item['Type1'], item['Type2'], item['Ability1'], \
+                   item['Ability2'], item['Image']))
         conn.commit()
  
     print("\nList of Pokemon complete, {0} names were inserted",len(nameList))
@@ -46,10 +48,11 @@ def addPokemon(Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, A
     # Called by main save() function.  It just inserts the arguments that were passed in
     # as new entries into the DB
     # 
-    id = randint(25,63)
     conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
-    c.execute("INSERT INTO pokemon VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",(id, Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, Ability2, Image))
+    c.execute("INSERT INTO pokemon(Name, Nickname, Number, Height, Weight, Type1, Type2,\
+              Ability1, Ability2, Image) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+                  (Name, Nickname, Number, Height, Weight, Type1, Type2, Ability1, Ability2, Image))
     conn.commit()
 
     c.close()            # Close the cursor
@@ -83,6 +86,7 @@ def deletePokemon(number):
     conn = sqlite3.connect('pokeDB.db')     # connect to the database
     c = conn.cursor()                         # create the cursor
     c.execute("DELETE FROM pokemon WHERE number=?",(number,))  #remember the , for the TUPLE!
+    conn.commit()
     c.execute("SELECT * FROM pokemon")
     results= c.fetchall()
     c.close()            # Close the cursor

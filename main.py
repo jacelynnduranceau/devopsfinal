@@ -67,8 +67,7 @@ def list():
 @app.route("/delete_pokemon", methods=["POST"]) 
 def delete_pokemon():
     id = request.form['id']
-    results = db.deletePokemon(str(id))
-    print(results)
+    db.deletePokemon(str(id))
     return redirect(url_for('list'))  # send the results back to browser
 
 @app.route("/add", methods=["GET"])                      # user wants to add a player..... 
@@ -84,7 +83,6 @@ def add():
     results.append(pokemon.type2)
     results.append(pokemon.ability1)
     results.append(pokemon.ability2)
-    print(results)
     return render_template("add.html", results = results)  #    this form is also embedded in this container
 
 @app.route("/save", methods=["GET", "POST"])
