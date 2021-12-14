@@ -1,0 +1,6 @@
+docker build -t testapp-img .
+cd ./nginx
+docker build -t nginx-img .
+docker run -itd --name=test1 testapp-img
+docker run -itd --name=test1 testapp-img
+docer run -itd --name=LB -p 5000:5000 nginx-img
