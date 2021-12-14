@@ -6,14 +6,24 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <body>
-        <h2> Select an Action</h2>
-        <a href ="/pokedex">View Pokédex</a><br><br>
-        <a href="/catch">Catch a Pokémon</a><br><br>
-
         <div class="d2">
             <div class="d3">
                 <div class="d4">
-
+                    <table class="t1">
+                        <thead>
+                            <tr style="background-color: red; color: white" class="tr1">
+                                <th class="th1"><h2>Select an Action</h2></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tr1">
+                                <td><a href ="/pokedex">View Pokédex</a></td>
+                            </tr>
+                            <tr class="tr1">
+                                <td><a href="/catch">Catch a Pokémon</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

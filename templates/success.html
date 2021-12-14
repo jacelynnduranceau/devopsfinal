@@ -7,14 +7,25 @@
  </head>
 
  <body>
-     <h3>{{msg}}<img src={{img}}></h3>
-     <a href="/pokedex">View Pokédex</a><br>
-     <a href="/catch">Catch Another Pokémon</a><br>
 
      <div class="d2">
          <div class="d3">
              <div class="d4">
-               
+                <table class="t1">
+                    <thead>
+                        <tr style="background-color: red; color: white; padding: 0" class="tr1">
+                            <th class="th1"><h3 style="margin-bottom: 0; padding-bottom: 0">{{msg}}<br><img src={{img}}></h3></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tr1">
+                            <td><a href="/pokedex">View Pokédex</a></td>
+                        </tr>
+                        <tr class="tr1">
+                            <td><a href="/catch">Catch Another Pokémon</a></td>
+                        </tr>
+                    </tbody>
+                </table>
              </div>
          </div>
      </div>
