@@ -3,6 +3,7 @@
 
 <head>
     <title>Your Pokémon</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -35,21 +36,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for result in results %}  
-                            <tr class="tr1">  
-                                <td><img src={{result[10]}}></td> 
+                        {% for result in results %}
+                            <tr class="tr1">
+                                <td><img src={{result[10]}}></td>
                                 <td>{{result[3]}}</td>
-                                <td>{{result[1]}}</td>  
+                                <td>{{result[1]}}</td>
                                 <td>{{result[2]}}</td>
-                                <td>{{result[4]}}</td> 
-                                <td>{{result[5]}}</td> 
-                                <td>{{result[6]}}</td> 
-                                <td>{{result[7]}}</td>     
-                                <td>{{result[8]}}</td>     
-                                <td>{{result[9]}}</td>   
+                                <td>{{result[4]}}</td>
+                                <td>{{result[5]}}</td>
+                                <td>{{result[6]}}</td>
+                                <td>{{result[7]}}</td>
+                                <td>{{result[8]}}</td>
+                                <td>{{result[9]}}</td>
                                 <td><form action="/delete_pokemon" method="post"><input hidden name="id" value={{result[3]}}><button class="b2" type="submit" value="1">Remove</button></form></a></td>
-                            </tr>  
-                        {% endfor %} 
+                            </tr>
+                        {% endfor %}
                         <tr class="tr1">
                             <td colspan="11">
                                 <table style="width: 95%; margin-left: auto; margin-right: auto;">
